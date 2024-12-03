@@ -35,3 +35,13 @@ def send_sms(phone_number,message):
 if __name__ == '__main__':
     phone_numbers = get_phone_numbers()
     store_numbers_in_redis(phone_numbers)
+
+#Retrieve numbers from Redis and send sms
+
+message = "This is a test message"
+for phone_number in redis_client.smembers('phone_numbers'):
+    status = send_sms(phone_number.decode(),message)
+    if status == 200:
+        print(f"Message sent to {phone_number.decode()}")
+    else:
+        print(f"Message failed to send to {phone_number.decode()}")
