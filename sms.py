@@ -31,4 +31,7 @@ def send_sms(phone_number,message):
     }
     response = requests.post(api_url, json=payload)
     return response.status_code()
-
+#Main function to execute the program
+if __name__ == '__main__':
+    phone_numbers = get_phone_numbers()
+    store_numbers_in_redis(phone_numbers)
